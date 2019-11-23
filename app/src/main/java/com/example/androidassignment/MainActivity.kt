@@ -1,6 +1,7 @@
 package com.example.androidassignment
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,7 @@ import com.example.androidassignment.models.jsonFeedRow
 import com.example.androidassignment.utils.CheckInternet
 import com.example.androidassignment.viewModel.feedViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.Duration
 
 /**
  * @author girishsharma
@@ -24,15 +26,20 @@ class MainActivity : FragmentActivity() , SwipeRefreshLayout.OnRefreshListener {
     lateinit var feedVm: feedViewModel
 
     override fun onRefresh() {
-        swipeRefreshMain.isRefreshing = true
-        if (CheckInternet.networkOn(this))
+        if (CheckInternet.networkOn(this)) {
+            swipeRefreshMain.isRefreshing = true
             fetchFeed()
+        }else{
+            swipeRefreshMain.isRefreshing = false
+            Toast.makeText(this,resources.getString(R.string.textNetwork).toString(),Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
+        swipeRefreshMain.setOnRefreshListener(this)
     }
 
 

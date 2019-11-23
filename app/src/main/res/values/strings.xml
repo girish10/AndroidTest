@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AndroidAssignment</string>
+    <string name="app_name">Android Test</string>
+
+    <string name="textNA">NA</string>
 </resources>

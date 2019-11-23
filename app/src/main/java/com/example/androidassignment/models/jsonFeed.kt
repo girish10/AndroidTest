@@ -1,4 +1,4 @@
-package com.kotlin.girishsharma.myapplication.models
+package com.example.androidassignment.models
 
 import com.google.gson.annotations.SerializedName
 

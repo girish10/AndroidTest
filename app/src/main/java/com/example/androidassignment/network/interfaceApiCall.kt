@@ -1,7 +1,6 @@
-package com.kotlin.girishsharma.myapplication.network
+package com.example.androidassignment.network
 
-import com.kotlin.girishsharma.myapplication.models.jsonFeed
-
+import com.example.androidassignment.models.jsonFeed
 import retrofit2.Call
 import retrofit2.http.GET
 

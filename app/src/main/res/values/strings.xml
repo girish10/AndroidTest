@@ -3,4 +3,5 @@
 
     <string name="textNA">NA</string>
     <string name="textNetwork">Please check your network connectivity.</string>
+    <string name="textNoData">No data found.</string>
 </resources>

@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.layout_listitem.view.*
 
 /**
  * @author girishsharma
+ * this is a adapter class used to used to inflate view in the RecyclerView
  */
 class FeedsAdapter(private val jsonFeedRows: List<jsonFeedRow>?, private val context: Context) : RecyclerView.Adapter<FeedsAdapter.FeedView>() {
 
@@ -29,15 +30,19 @@ class FeedsAdapter(private val jsonFeedRows: List<jsonFeedRow>?, private val con
     override fun onBindViewHolder(holder: FeedView, position: Int) {
         val row = jsonFeedRows!![position]
         if (row.title != null) {
-            holder.titleText!!.text = row.title
+            holder.titleText.text = row.title
         } else {
-            holder.titleText!!.text = context.resources.getString(R.string.textNA)
+            holder.titleText.text = context.resources.getString(R.string.textNA)
         }
         if (row.description != null) {
-            holder.descriptionText!!.text = row.description
+            holder.descriptionText.text = row.description
         } else {
-            holder.descriptionText!!.text = context.resources.getString(R.string.textNA)
+            holder.descriptionText.text = context.resources.getString(R.string.textNA)
         }
+
+        /**
+         * Using third party library for image Lazy loading
+         * */
         Picasso.get().load(row.imageHref).placeholder(R.mipmap.ic_launcher_round)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(holder.imageView);
     }
@@ -46,6 +51,9 @@ class FeedsAdapter(private val jsonFeedRows: List<jsonFeedRow>?, private val con
         return jsonFeedRows?.size ?: 0
     }
 
+    /**
+     * View to represent single row item
+     * */
     inner class FeedView(itemView: View) : ViewHolder(itemView) {
         val titleText: TextView = itemView.txtViewHeader
         val descriptionText: TextView = itemView.txtViewDesc

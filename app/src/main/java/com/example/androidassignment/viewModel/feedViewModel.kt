@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.example.androidassignment.viewModel
 
 import android.app.Application

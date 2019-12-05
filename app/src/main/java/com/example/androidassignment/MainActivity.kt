@@ -28,6 +28,26 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     lateinit var feedVm: feedViewModel
 
+    /**
+     * Initialize controls and variables
+     * */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        ButterKnife.bind(this)
+        swipeRefreshMain.setOnRefreshListener(this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        onRefresh()
+    }
+
+    /**
+     * Method for network check, Controls Visibility toggle
+     * and loader handling
+     * */
     override fun onRefresh() {
         if (CheckInternet.networkOn(this)) {
             toggleVisibility(recylerViewMain, txtViewMainScreen)
@@ -44,19 +64,10 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
-        swipeRefreshMain.setOnRefreshListener(this)
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        onRefresh()
-    }
-
+    /**
+     * Method for making network call and on response calling loadFeedRows()
+     * to show data in RecyclerView
+     * */
     private fun fetchFeed() {
         val factory = feedViewModel.Factory(this.application);
         feedVm = ViewModelProviders.of(this, factory).get(feedViewModel::class.java)
@@ -70,6 +81,10 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
         })
     }
 
+    /**
+     * Method to show data in the RecyclerView
+     * if(nodata) show (msg)
+     * */
     private fun loadFeedRows(arrayFeedRows: List<jsonFeedRow>) {
         if (arrayFeedRows.isNotEmpty()) {
             toggleVisibility(recylerViewMain, txtViewMainScreen)
@@ -87,6 +102,9 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
     }
 
+    /**
+     * Method to toggle Visibility of controls
+     * */
     private fun toggleVisibility(view: View, hideView: View) {
         hideView.visibility = View.GONE
         view.visibility = View.VISIBLE

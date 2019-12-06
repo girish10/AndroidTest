@@ -27,6 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -64,4 +65,10 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
+
+    androidTestImplementation 'org.mockito:mockito-android:2.19.0'
+
+    androidTestImplementation 'org.mockito:mockito-core:2.19.0'
+
+
 }

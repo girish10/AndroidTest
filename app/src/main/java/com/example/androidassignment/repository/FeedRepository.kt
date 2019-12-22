@@ -1,0 +1,47 @@
+package com.example.androidassignment.repository
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.androidassignment.models.JsonFeed
+import com.example.androidassignment.network.InterfaceApiCall
+import com.example.androidassignment.network.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+/**
+ * @author girishsharma
+ *
+ * Class for LiveData to handle success and failures */
+
+class FeedRepository private constructor() {
+
+    val jsonFeedData: LiveData<JsonFeed>
+        get() {
+            val data = MutableLiveData<JsonFeed>()
+            val apiService = RetrofitClient.getClient().create(InterfaceApiCall::class.java)
+            val call = apiService.fetchFeed()
+
+            call.enqueue(object : Callback<JsonFeed> {
+                override fun onResponse(call: Call<JsonFeed>, response: Response<JsonFeed>) {
+                    data.value = response.body()
+                }
+
+                override fun onFailure(call: Call<JsonFeed>, t: Throwable) {
+                    data.value = null
+                }
+            })
+            return data
+        }
+
+    companion object {
+        private var ourInstance: FeedRepository? = null
+        @get:Synchronized
+        val instance: FeedRepository?
+            get() {
+                if (ourInstance == null) {
+                    ourInstance = FeedRepository()
+                }
+                return ourInstance
+            }
+    }
+}

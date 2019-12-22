@@ -1,6 +1,6 @@
 package com.example.androidassignment.network
 
-import com.example.androidassignment.models.jsonFeed
+import com.example.androidassignment.models.JsonFeed
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -8,7 +8,7 @@ import retrofit2.http.GET
  * @author girishsharma
  *
  * interface for API calls*/
-interface interfaceApiCall {
+interface InterfaceApiCall {
     @GET("facts.json")
-    fun fetchFeed(): Call<jsonFeed>
+    fun fetchFeed(): Call<JsonFeed>
 }

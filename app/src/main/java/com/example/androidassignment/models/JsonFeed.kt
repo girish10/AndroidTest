@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author girishsharma
  * Model Class for json feed main data */
-class jsonFeed {
+class JsonFeed {
     @SerializedName("title")
     var title: String? = null
 
     @SerializedName("rows")
-    var arrayFeedRows: List<jsonFeedRow> = ArrayList()
+    var arrayFeedRows: List<JsonFeedRow> = ArrayList()
 
 }

@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author girishsharma
  *
  * Class for network communication such as API Calls */
-public class retrofitClient {
+public class RetrofitClient {
     private static Retrofit retrofit;
     public static Retrofit getClient() {
         if (retrofit == null) {

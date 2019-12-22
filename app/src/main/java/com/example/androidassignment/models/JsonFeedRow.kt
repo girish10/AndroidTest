@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
  * @author girishsharma
  *
  * Model class for inner data fo the feed rows */
-class jsonFeedRow {
+class JsonFeedRow {
 
     @SerializedName("title")
     var title: String? = null

@@ -7,24 +7,24 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidassignment.models.jsonFeed
-import com.example.androidassignment.repository.feedRepository
+import com.example.androidassignment.models.JsonFeed
+import com.example.androidassignment.repository.FeedRepository
 
 /**
  * @author girishsharma
  *  ViewModel class
  * */
-class feedViewModel(application: Application) :AndroidViewModel(application){
+class FeedViewModel(application: Application) :AndroidViewModel(application){
 
-    var feedObserver: LiveData<jsonFeed>? = null
+    var feedObserver: LiveData<JsonFeed>? = null
 
     fun fetchFeed() {
-        feedObserver = feedRepository.instance!!.jsonFeedData
+        feedObserver = FeedRepository.instance!!.jsonFeedData
     }
 
     class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return feedViewModel(application) as T
+            return FeedViewModel(application) as T
         }
     }
 }

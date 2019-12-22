@@ -1,7 +1,6 @@
 package com.example.androidassignment.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.androidassignment.R
-import com.example.androidassignment.models.jsonFeedRow
+import com.example.androidassignment.models.JsonFeedRow
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_listitem.view.*
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.layout_listitem.view.*
  * @author girishsharma
  * this is a adapter class used to used to inflate view in the RecyclerView
  */
-class FeedsAdapter(private val jsonFeedRows: List<jsonFeedRow>?, private val context: Context) : RecyclerView.Adapter<FeedsAdapter.FeedView>() {
+class FeedsAdapter(private val JsonFeedRows: List<JsonFeedRow>?, private val context: Context) : RecyclerView.Adapter<FeedsAdapter.FeedView>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedView {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,7 +27,7 @@ class FeedsAdapter(private val jsonFeedRows: List<jsonFeedRow>?, private val con
     }
 
     override fun onBindViewHolder(holder: FeedView, position: Int) {
-        val row = jsonFeedRows!![position]
+        val row = JsonFeedRows!![position]
         if (row.title != null) {
             holder.titleText.text = row.title
         } else {
@@ -44,11 +43,11 @@ class FeedsAdapter(private val jsonFeedRows: List<jsonFeedRow>?, private val con
          * Using third party library for image Lazy loading
          * */
         Picasso.get().load(row.imageHref).placeholder(R.mipmap.ic_launcher_round)
-                .networkPolicy(NetworkPolicy.NO_CACHE).into(holder.imageView);
+                .networkPolicy(NetworkPolicy.NO_CACHE).into(holder.imageView)
     }
 
     override fun getItemCount(): Int {
-        return jsonFeedRows?.size ?: 0
+        return JsonFeedRows?.size ?: 0
     }
 
     /**

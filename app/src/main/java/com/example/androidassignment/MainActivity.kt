@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.ButterKnife
 import com.example.androidassignment.adapter.FeedsAdapter
-import com.example.androidassignment.models.jsonFeedRow
+import com.example.androidassignment.models.JsonFeedRow
 import com.example.androidassignment.utils.CheckInternet
-import com.example.androidassignment.viewModel.feedViewModel
+import com.example.androidassignment.viewModel.FeedViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
 
-    lateinit var feedVm: feedViewModel
+    lateinit var feedVm: FeedViewModel
 
     /**
      * Initialize controls and variables
@@ -66,8 +66,8 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
      * to show data in RecyclerView
      * */
     private fun fetchFeed() {
-        val factory = feedViewModel.Factory(this.application)
-        feedVm = ViewModelProviders.of(this, factory).get(feedViewModel::class.java)
+        val factory = FeedViewModel.Factory(this.application)
+        feedVm = ViewModelProviders.of(this, factory).get(FeedViewModel::class.java)
         feedVm.fetchFeed()
         feedVm.feedObserver!!.observe(this, Observer { jsonFeed ->
             if (jsonFeed != null) {
@@ -82,7 +82,7 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
      * Method to show data in the RecyclerView
      * if(no data) show (msg)
      * */
-    private fun loadFeedRows(arrayFeedRows: List<jsonFeedRow>) {
+    private fun loadFeedRows(arrayFeedRows: List<JsonFeedRow>) {
         if (arrayFeedRows.isNotEmpty()) {
             toggleVisibility(recylerViewMain, txtViewMainScreen)
             val rowsAdapter = FeedsAdapter(arrayFeedRows, this)

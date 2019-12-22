@@ -31,8 +31,8 @@ class MainActivityTest {
     private var activityTestRule: ActivityTestRule<MainActivity> =
         ActivityTestRule(MainActivity::class.java)
 
-    val connectivityManager = Mockito.mock(ConnectivityManager::class.java)
-    val networkInfo = Mockito.mock(NetworkInfo::class.java)
+    private val connectivityManager = Mockito.mock(ConnectivityManager::class.java)!!
+    private val networkInfo = Mockito.mock(NetworkInfo::class.java)!!
 
     /**
      * UI Test to check screen state when data is available

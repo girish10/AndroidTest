@@ -1,6 +1,5 @@
 package com.example.androidassignment
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.ButterKnife
 import com.example.androidassignment.adapter.FeedsAdapter
@@ -17,7 +15,6 @@ import com.example.androidassignment.models.jsonFeedRow
 import com.example.androidassignment.utils.CheckInternet
 import com.example.androidassignment.viewModel.feedViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import java.time.Duration
 
 /**
  * @author girishsharma
@@ -58,7 +55,7 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
             toggleVisibility(txtViewMainScreen, recylerViewMain)
             Toast.makeText(
                 this,
-                resources.getString(R.string.textNetwork).toString(),
+                resources.getString(R.string.textNetwork),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -69,7 +66,7 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
      * to show data in RecyclerView
      * */
     private fun fetchFeed() {
-        val factory = feedViewModel.Factory(this.application);
+        val factory = feedViewModel.Factory(this.application)
         feedVm = ViewModelProviders.of(this, factory).get(feedViewModel::class.java)
         feedVm.fetchFeed()
         feedVm.feedObserver!!.observe(this, Observer { jsonFeed ->
@@ -83,7 +80,7 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     /**
      * Method to show data in the RecyclerView
-     * if(nodata) show (msg)
+     * if(no data) show (msg)
      * */
     private fun loadFeedRows(arrayFeedRows: List<jsonFeedRow>) {
         if (arrayFeedRows.isNotEmpty()) {

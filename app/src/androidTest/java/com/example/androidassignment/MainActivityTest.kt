@@ -60,7 +60,7 @@ class MainActivityTest {
     fun checkNoInternetMessage() {
         activityTestRule.launchActivity(Intent())
         Mockito.`when`(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI))
-            .thenReturn(networkInfo);
+            .thenReturn(networkInfo)
 
         // Here we can Mock network check for different scenarios
         Mockito.`when`(networkInfo.isConnected).thenReturn(true)

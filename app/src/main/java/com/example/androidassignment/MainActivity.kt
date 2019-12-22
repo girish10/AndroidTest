@@ -49,12 +49,12 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
      * */
     override fun onRefresh() {
         if (CheckInternet.networkOn(this)) {
-            toggleVisibility(recylerViewMain, txtViewMainScreen)
+            toggleVisibility(recyclerViewMain, txtViewMainScreen)
             swipeRefreshMain.isRefreshing = true
             fetchFeed()
         } else {
             swipeRefreshMain.isRefreshing = false
-            toggleVisibility(txtViewMainScreen, recylerViewMain)
+            toggleVisibility(txtViewMainScreen, recyclerViewMain)
             Toast.makeText(
                 this,
                 resources.getString(R.string.textNetwork),
@@ -86,17 +86,17 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
      * */
     private fun loadFeedRows(arrayFeedRows: List<JsonFeedRow>) {
         if (arrayFeedRows.isNotEmpty()) {
-            toggleVisibility(recylerViewMain, txtViewMainScreen)
+            toggleVisibility(recyclerViewMain, txtViewMainScreen)
             val rowsAdapter = FeedsAdapter(arrayFeedRows, this)
             val decoration = DividerItemDecoration(
                 this,
                 DividerItemDecoration.VERTICAL
             )
-            recylerViewMain.layoutManager = LinearLayoutManager(this)
-            recylerViewMain.addItemDecoration(decoration)
-            recylerViewMain.adapter = rowsAdapter
+            recyclerViewMain.layoutManager = LinearLayoutManager(this)
+            recyclerViewMain.addItemDecoration(decoration)
+            recyclerViewMain.adapter = rowsAdapter
         } else {
-            toggleVisibility(txtViewMainScreen, recylerViewMain)
+            toggleVisibility(txtViewMainScreen, recyclerViewMain)
             txtViewMainScreen.text = resources.getString(R.string.textNoData)
         }
     }

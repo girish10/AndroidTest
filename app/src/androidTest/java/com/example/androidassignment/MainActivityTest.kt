@@ -42,9 +42,9 @@ class MainActivityTest {
         activityTestRule.launchActivity(Intent())
         if(networkInfo.isConnected) {
             val recyclerView =
-                activityTestRule.activity.findViewById(R.id.recylerViewMain) as RecyclerView
+                activityTestRule.activity.findViewById(R.id.recyclerViewMain) as RecyclerView
             val itemsCount = recyclerView.adapter?.itemCount
-            Espresso.onView(ViewMatchers.withId(R.id.recylerViewMain)).check(matches(isDisplayed()))
+            Espresso.onView(ViewMatchers.withId(R.id.recyclerViewMain)).check(matches(isDisplayed()))
             assertEquals(
                 itemsCount,
                 activityTestRule.activity.feedVm.feedObserver?.value?.arrayFeedRows?.size

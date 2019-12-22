@@ -1,5 +1,7 @@
 package com.example.androidassignment.repository
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.androidassignment.models.JsonFeed
@@ -8,6 +10,7 @@ import com.example.androidassignment.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 /**
  * @author girishsharma
  *
@@ -18,8 +21,9 @@ class FeedRepository private constructor() {
     val jsonFeedData: LiveData<JsonFeed>
         get() {
             val data = MutableLiveData<JsonFeed>()
-            val apiService = RetrofitClient.getClient().create(InterfaceApiCall::class.java)
-            val call = apiService.fetchFeed()
+            val rftClient: RetrofitClient? = RetrofitClient()
+            val apiService = rftClient?.getClient(context)?.create(InterfaceApiCall::class.java)
+            val call = apiService!!.fetchFeed()
 
             call.enqueue(object : Callback<JsonFeed> {
                 override fun onResponse(call: Call<JsonFeed>, response: Response<JsonFeed>) {
@@ -34,7 +38,15 @@ class FeedRepository private constructor() {
         }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var ourInstance: FeedRepository? = null
+        @SuppressLint("StaticFieldLeak")
+        private lateinit var context: Context
+
+        fun setContext(con: Context) {
+            context = con
+        }
+
         @get:Synchronized
         val instance: FeedRepository?
             get() {

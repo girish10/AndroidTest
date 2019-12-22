@@ -70,5 +70,7 @@ dependencies {
 
     androidTestImplementation 'org.mockito:mockito-core:2.27.0'
 
+    /*For network call Logging*/
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
 }

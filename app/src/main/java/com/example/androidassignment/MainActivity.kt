@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.ButterKnife
 import com.example.androidassignment.adapter.FeedsAdapter
 import com.example.androidassignment.models.JsonFeedRow
+import com.example.androidassignment.repository.FeedRepository
 import com.example.androidassignment.utils.CheckInternet
 import com.example.androidassignment.viewModel.FeedViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,6 +34,7 @@ class MainActivity : FragmentActivity(), SwipeRefreshLayout.OnRefreshListener {
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
         swipeRefreshMain.setOnRefreshListener(this)
+        FeedRepository.setContext(this)
     }
 
 

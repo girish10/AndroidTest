@@ -72,5 +72,6 @@ dependencies {
 
     /*For network call Logging*/
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 }
